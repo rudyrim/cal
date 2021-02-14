@@ -40,9 +40,7 @@ span{
     background:#00ffb0;
     display : none;
 }
-#footcalen{
 
-}
 </style>
 </head>
 <body>
@@ -52,10 +50,11 @@ span{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 
 <div class="Calendrier">
-    <div class="headcalen">
-        <span style="width:33%"><button onclick="myFunction()"> Next </button></span>
+
+    <div id="headcalen">
+        <span style="width:33%"><button onclick="myFunction()"> Event </button></span>
         <span id="selectDate" style="width:auto"> Date</span>
-    </div>
+    </div> 
     <div id="bodycalen">
 
     </div>
@@ -66,6 +65,7 @@ span{
     <div id="footcalen">
 
     </div>
+
 </div>
 
 <script>
@@ -108,12 +108,13 @@ $('#bodycalen').datepicker({
   language: 'fr',
 autoclose: true,
   todayHighlight: true,
-}).datepicker('setDates', [new Date(2021, 1, 15), new Date(2021, 1, 18), new Date(2021, 1, 17)]) .on('changeDate', showTestDate);
+}).datepicker('setDates', [new Date(2021, 1, 16), new Date(2021, 1, 18), new Date(2021, 1, 17)]) .on('changeDate', showTestDate);
+
 
 function showTestDate(){
-  var value = $('#headcalen').datepicker('getFormattedDate');
-  $("#headcalen").val(value);
-  
+  var value = $('#bodycalen').datepicker('getFormattedDate');
+  document.getElementById('selectDate').innerHTML= value.substr(value.length-10, value.length);
+
   count = ['08h00','08h15','09h00','09h15'];
   myFunction();
 container = document.getElementById('bodyevent');
@@ -122,6 +123,7 @@ container.innerHTML="";
   for(i = 0; i < count.length; i++){
     container.innerHTML+="<div><button class='items'>"+ count[i] +"</button></div>";
   }
+  
 }
 </script>
 </body>
