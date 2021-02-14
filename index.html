@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Calendrier</title>
+  <link rel="stylesheet" href="./style.css">
+<style>
+    #pickyDate{
+    color:#4f372d;
+    font-size: 20px;
+    width:350px;
+    background-color:#eb6841 ;
+ 
+}
+  #showDate{
+    width:350px;
+    background-color:#eb6841 ;
+    display:none;
+  }
+.items{
+  
+  text-align:center;
+  margin-top:10px;
+  width:250px;
+  height:20px;
+  background:#00a0b0;
+}
+span{
+    display: inline-block;
+}
+.Calendrier{
+    width:250px;
+}
+#bodycalen{
+    height: 300px;
+    background:#00a0b0;
+}
+#bodyevent{
+    height: 300px;
+    background:#00ffb0;
+    display : none;
+}
+#footcalen{
+
+}
+</style>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
+<div class="Calendrier">
+    <div class="headcalen">
+        <span style="width:33%"><button onclick="myFunction()"> Next </button></span>
+        <span id="selectDate" style="width:auto"> Date</span>
+    </div>
+    <div id="bodycalen">
+
+    </div>
+    <div id="bodyevent">
+
+    </div>
+
+    <div id="footcalen">
+
+    </div>
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("bodycalen");
+  var y = document.getElementById("bodyevent");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    y.style.display = "none";
+  } else {
+    x.style.display = "none";
+    y.style.display = "block";
+  }
+}
+
+
+(function($){
+$.fn.datepicker.dates['fr'] = {
+days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+daysMin: ["di", "lu", "ma", "me", "je", "ve", "sa"],
+months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+today: "Aujourd'hui",
+monthsTitle: "Mois",
+clear: "Effacer",
+weekStart: 1,
+format: "dd/mm/yyyy"
+};
+}(jQuery));
+
+
+$('#bodycalen').datepicker({
+  format: "dd.mm.yyyy",
+  startWeek: 1,
+  inline:true,
+  multidate: true,
+  todayHighlight: true,
+  minDate: 0,
+  language: 'fr',
+autoclose: true,
+  todayHighlight: true,
+}).datepicker('setDates', [new Date(2021, 1, 15), new Date(2021, 1, 18), new Date(2021, 1, 17)]) .on('changeDate', showTestDate);
+
+function showTestDate(){
+  var value = $('#headcalen').datepicker('getFormattedDate');
+  $("#headcalen").val(value);
+  
+  count = ['08h00','08h15','09h00','09h15'];
+  myFunction();
+container = document.getElementById('bodyevent');
+container.innerHTML="";
+
+  for(i = 0; i < count.length; i++){
+    container.innerHTML+="<div><button class='items'>"+ count[i] +"</button></div>";
+  }
+}
+</script>
+</body>
+</html>
